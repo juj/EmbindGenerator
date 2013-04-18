@@ -330,11 +330,6 @@ namespace EmbindGenerator
                         isGoodSymbol = false;
                         reason = "(Multiple constructors not yet supported by embind!)";
                     }
-                    if (isGoodSymbol && !f.isStatic && !isCtor && f.type != "void" && !f.isConst && f.parameters.Count <= 2)
-                    {
-                        isGoodSymbol = false;
-                        reason = "(Non-void-returning, non-const functions not yet supported by embind!)";
-                    }
 
                     if (!isGoodSymbol)
                         t += "// /*" + reason + "*/ ";
