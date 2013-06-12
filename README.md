@@ -28,13 +28,13 @@ This section must be performed once for the new project that contains types that
 4. (Optional) In the LaTeX topic of the project, you can uncheck the GENERATE_LATEX checkbox, since this is unneeded for EmbindGenerator.
 5. (Optional) In the HTML topic of the project, you can uncheck the GENERATE_HTML checkbox, since this is unneeded for EmbindGenerator.
 6. Save the doxygen run configuration file as 'Doxyfile' in the directory where your project resides in.
-
 ## Generating Embind code files for your Emscripten project
 
 To generate the C/C++ -> JS interop registration code, perform the steps in this section. These steps must also be rerun always whenever you change the public .cpp/.h code interface of your C/C++ types, so that the generated embind registration code will get updated for those types.
 
 1. In the directory of your project, run '<b>doxygen.exe Doxyfile</b>'. After doxygen finishes, you should have a folder xml\ that contains an xml file for each class you want to expose. If the xml files do not appear, use Doxywizard to set up the proper lookup paths to your project .cpp and .h files, and to check that the output xml\ folder is correct.
 2. In the directory of your project, run '<b>EmbindGenerator.exe path_to_xml_directory class1 \[class2\] ... \[classN\]</b>', where path_to_xml_directory is a relative or an absolute path to the directory where doxygen generated all the .xml output files, and the parameters class1 to classN are the names of C++ classes, structures or symbols you want to expose to Javascript.
+3. Create a new file "<b>embind_prologue.h</b>" in the same directory the file "<b>embind_symbols.cpp</b>" was generated to. Manually add #include directives to that file as necessary to make embind_symbols.cpp build properly.
 
 After running EmbindGenerator.exe, the current directory should contain two new files 'embind_symbols.cpp' and 'embind_symbols.js', which contain all the necessary registration code for the C/C++ types that you specified.
 
