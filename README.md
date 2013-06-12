@@ -42,7 +42,7 @@ After running EmbindGenerator.exe, the current directory should contain two new 
 
 After generating the embind bindings files for your C++ types, you must integrate the EmbindGenerator output files to your Emscripten project, and (re)build your codebase with Emscripten. To achieve that:
 
-1. Add the embind_symbols.cpp to your project build pipeline. This step depends on whatever build architecture you are using. The file embind_symbols.cpp <b>must</b> be built with the <b>--bind</b> command line option enabled for Emscripten. Also, you may <b>not</b> specify a <b>--std=</b> directive to em++/clang in the invocation, since using --bind will override the C++11 standard to be used for the build of that file.
+1. Add the embind_symbols.cpp file into your project to be built along with the rest of your project .cpp files. This step depends on whatever build architecture you are using. The file embind_symbols.cpp <b>must</b> be built with the <b>--bind</b> command line option enabled for Emscripten. Also, you may <b>not</b> specify a <b>--std=</b> directive to em++/clang in the invocation, since using --bind will override the C++11 standard to be used for the build of that file.
 2. In the Emscripten .html/.js link stage, add the <b>--bind</b> option. This will instruct Emscripten that it needs to link in important internal .js files related to embind. If you are missing embind/emval-related symbols at runtime, you may have forgotten this step.
 3. Add a linker option <b>--pre-js embind_symbols.js</b> to the Emscripten .html/.js link stage. This will add the EmbindGenerator-generated .js bindings file to the final output.
 
